@@ -34,4 +34,8 @@ deck = [
     for suit in (club, diamond, heart, spade)
 ]
 
-print(deck)
+# Specify what to export from this module when we import * from another module
+__all__ = ['factoryfunction']
+
+if __name__ == '__main__':
+    print(deck)

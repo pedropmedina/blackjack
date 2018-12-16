@@ -34,16 +34,3 @@ class CardFactory:
 
     def suit(self, suit):
         return self.class_(self.rank_str, suit)
-
-
-deck = [
-    CardFactory().rank(rank).suit(suit)
-    for rank in range(1, 14)
-    for suit in (club, diamond, heart, spade)
-]
-
-random.shuffle(deck)
-
-hand = [deck.pop(), deck.pop()]
-
-print(hand)
