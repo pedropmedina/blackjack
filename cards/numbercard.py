@@ -5,4 +5,4 @@ from .card import Card
 # Notice that hard and soft are string representations, so we wrap int in str
 class NumberCard(Card):
     def __init__(self, rank, suit):
-        super().__init__(rank, suit, str(rank), str(rank))
+        super().__init__(rank, suit, rank, rank)

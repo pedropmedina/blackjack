@@ -1,10 +1,17 @@
+import random
+
 from cards.acecard import AceCard
 from cards.facecard import FaceCard
 from cards.numbercard import NumberCard
 from suit.suit import Suit
 
-# There are four Suits to be initialized:
+# Suit initializes four constant objects:
 # Club, Diamond, Heart, Spade
+
+# They're constant objects, because, we won't be instantiating, mutating them
+# on every use, instead, they'll always be the same as they get
+# passed as argument to suit parameter in Card
+
 # Use unpacking to assign initialized Suit to each variable,
 #  we could have also initialize one at a time
 club, diamond, heart, spade = (
@@ -14,20 +21,7 @@ club, diamond, heart, spade = (
     Suit('Spade', '♠︎'),
 )
 
-# factory function
-def card(rank, suit):
-    if 1 == rank:
-        return AceCard(rank, suit)
-    elif 2 <= rank <= 10:
-        return NumberCard(rank, suit)
-    elif 11 <= rank <= 13:
-        return FaceCard(rank, suit)
-    else:
-        raise NotImplementedError('Rank is out of range')
-
-
-# This is another approach to acomplish the above. We use a
-# Class Factory instead and organize the logic inside
+# This is known as a Fluent interface for object construction
 class CardFactory:
     def rank(self, rank):
         self.class_, self.rank_str = {
@@ -35,7 +29,7 @@ class CardFactory:
             11: (FaceCard, 'J'),
             12: (FaceCard, 'Q'),
             13: (FaceCard, 'K'),
-        }.get(rank, (NumberCard, rank))
+        }.get(rank, (NumberCard, str(rank)))
         return self
 
     def suit(self, suit):
@@ -43,9 +37,13 @@ class CardFactory:
 
 
 deck = [
-    card(rank, suit)
+    CardFactory().rank(rank).suit(suit)
     for rank in range(1, 14)
     for suit in (club, diamond, heart, spade)
 ]
 
-print(deck)
+random.shuffle(deck)
+
+hand = [deck.pop(), deck.pop()]
+
+print(hand)
