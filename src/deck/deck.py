@@ -36,3 +36,6 @@ class Deck(list):
         marker = random.randint(1, 52)
         for _ in range(marker):
             self.pop()
+
+    def __bool__(self):
+        return bool(self)

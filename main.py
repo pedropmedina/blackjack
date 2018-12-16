@@ -5,3 +5,4 @@ deck = Deck()
 hand = Hand(deck.pop(), deck.pop(), deck.pop())
 
 print(hand.cards)
+print(repr(hand))

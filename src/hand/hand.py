@@ -17,11 +17,20 @@ class Hand:
         hand1 = Hand(other.dealer_card, other.cards[1], card1)
         return (hand0, hand1)
 
-    def __str__(self):
-        return ', '.join(map(str, self.cards))
-
     def hard_total(self):
         return sum(c for c in self.cards)
 
     def soft_total(self):
         return sum(c for c in self.cards)
+
+    # This implementation of __str__ is more complex than the one
+    # found in Card, as here we are dealing with a collection of
+    # objects. In order to solve this, we map over the self.cards
+    # collections and make each Card object a string. The final
+    # result is a string of Card object
+    def __str__(self):
+        return ', '.join(map(str, self.cards))
+
+    def __repr__(self):
+        return f'{self.__class__.__name__}({repr(self.dealer_card)},\
+                                            {", ".join(map(repr, self.cards))})'
